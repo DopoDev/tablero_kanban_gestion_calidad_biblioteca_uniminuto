@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Prestamos{% endblock %}
+{% block content %}
+<div class="page">
+    <h1 class="title">Prestamos</h1>
+    <div class="card">
+        <form hx-post="/loans" hx-target="#loan-table" hx-swap="outerHTML">
+            <div class="form-group">
+                <label for="reader_email">Correo del lector</label>
+                <input class="input" type="email" id="reader_email" name="reader_email" required>
+            </div>
+            <div class="form-group">
+                <label for="book_id">ID del libro</label>
+                <input class="input" type="number" id="book_id" name="book_id" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Registrar prestamo</button>
+        </form>
+        <div id="form-message"></div>
+    </div>
+    {% include "loans/_rows.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Categoria</th>
+            <th>Disponibles</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.available_copies }}/{{ book.total_copies }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No se encontraron libros.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

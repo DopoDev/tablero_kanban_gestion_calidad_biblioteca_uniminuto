@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Catalogo{% endblock %}
+{% block content %}
+<div class="page">
+    <div class="page-header">
+        <h1 class="title">Catalogo de libros</h1>
+        {% if user.role.value == "LIBRARIAN" %}
+        <a class="btn btn-primary btn-inline" href="/books/new">Registrar libro</a>
+        {% endif %}
+    </div>
+    <input
+        class="input"
+        type="search"
+        name="q"
+        placeholder="Buscar por titulo, autor, ISBN o categoria"
+        hx-get="/books/search"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#book-results"
+    >
+    <div id="book-results">
+        {% include "books/_results.html" %}
+    </div>
+</div>
+{% endblock %}

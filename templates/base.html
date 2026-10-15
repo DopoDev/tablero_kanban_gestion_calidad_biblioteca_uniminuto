@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Biblioteca{% endblock %}</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+    {% if user %}
+    <nav class="nav">
+        <a class="link" href="/books">Libros</a>
+        {% if user.role.value == "LIBRARIAN" %}
+        <a class="link" href="/loans">Prestamos</a>
+        <a class="link" href="/readers">Lectores</a>
+        <a class="link" href="/reports/overdue">Vencidos</a>
+        <a class="link" href="/reports/inventory">Inventario</a>
+        {% else %}
+        <a class="link" href="/loans/mine">Mis prestamos</a>
+        <a class="link" href="/reservations/mine">Mis reservas</a>
+        {% endif %}
+        <form class="nav-logout" hx-post="/auth/logout" hx-trigger="click">
+            <button class="link" type="submit">Cerrar sesion</button>
+        </form>
+    </nav>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>

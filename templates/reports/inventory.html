@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Inventario{% endblock %}
+{% block content %}
+<div class="page">
+    <h1 class="title">Inventario</h1>
+    <table class="table">
+        <thead>
+            <tr><th>Titulo</th><th>ISBN</th><th>Total</th><th>Disponibles</th><th>Prestados</th></tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.book.title }}</td>
+                <td>{{ row.book.isbn }}</td>
+                <td>{{ row.book.total_copies }}</td>
+                <td>{{ row.book.available_copies }}</td>
+                <td>{{ row.on_loan }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No hay libros registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

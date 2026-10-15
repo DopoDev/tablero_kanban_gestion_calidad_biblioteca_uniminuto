@@ -1,0 +1,16 @@
+<table class="table" id="reservation-table">
+    <thead>
+        <tr><th>Libro</th><th>Fecha</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.book_id }}</td>
+            <td>{{ reservation.reservation_date }}</td>
+            <td>{{ reservation.status.value }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">No tienes reservas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

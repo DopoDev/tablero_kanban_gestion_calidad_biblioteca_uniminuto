@@ -1,0 +1,34 @@
+<table class="table" id="loan-table">
+    <thead>
+        <tr>
+            <th>Lector</th>
+            <th>Libro</th>
+            <th>Prestamo</th>
+            <th>Vence</th>
+            <th>Devuelto</th>
+            <th>Multa</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for loan in loans %}
+        <tr>
+            <td>{{ loan.user_id }}</td>
+            <td>{{ loan.book_id }}</td>
+            <td>{{ loan.loan_date }}</td>
+            <td>{{ loan.due_date }}</td>
+            <td>{{ loan.return_date or "-" }}</td>
+            <td>{{ loan.fine_amount }} {{ "(pendiente)" if not loan.fine_paid else "" }}</td>
+            <td>
+                {% if not loan.return_date %}
+                <button class="btn btn-inline" hx-post="/loans/{{ loan.id }}/return" hx-target="#loan-table" hx-swap="outerHTML">Devolver</button>
+                {% elif not loan.fine_paid %}
+                <button class="btn btn-inline" hx-post="/loans/{{ loan.id }}/pay-fine" hx-target="#loan-table" hx-swap="outerHTML">Pagar multa</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">No hay prestamos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

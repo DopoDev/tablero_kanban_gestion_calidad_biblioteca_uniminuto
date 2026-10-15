@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Mis prestamos{% endblock %}
+{% block content %}
+<div class="page">
+    <h1 class="title">Mis prestamos</h1>
+    <table class="table">
+        <thead>
+            <tr><th>Libro</th><th>Prestamo</th><th>Vence</th><th>Devuelto</th><th>Multa</th></tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+            <tr>
+                <td>{{ loan.book_id }}</td>
+                <td>{{ loan.loan_date }}</td>
+                <td>{{ loan.due_date }}</td>
+                <td>{{ loan.return_date or "-" }}</td>
+                <td>{{ loan.fine_amount }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No tienes prestamos activos.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

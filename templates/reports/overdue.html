@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Prestamos vencidos{% endblock %}
+{% block content %}
+<div class="page">
+    <h1 class="title">Prestamos vencidos</h1>
+    <table class="table">
+        <thead>
+            <tr><th>Lector</th><th>Libro</th><th>Vencio</th><th>Dias de retraso</th></tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.loan.user_id }}</td>
+                <td>{{ row.loan.book_id }}</td>
+                <td>{{ row.loan.due_date }}</td>
+                <td>{{ row.late_days }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">No hay prestamos vencidos.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

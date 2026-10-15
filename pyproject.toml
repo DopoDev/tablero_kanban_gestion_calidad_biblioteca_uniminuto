@@ -1,0 +1,41 @@
+[project]
+name = "gestion-biblioteca"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.20.0",
+    "fastapi>=0.141.1",
+    "itsdangerous>=2.2.0",
+    "jinja2>=3.1.6",
+    "pwdlib[argon2]>=0.3.1",
+    "pydantic-settings>=2.15.0",
+    "pymysql>=1.2.0",
+    "python-multipart>=0.0.32",
+    "sqlalchemy>=2.0.52",
+    "uvicorn>=0.52.4",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["app"]
+
+[tool.ruff.lint]
+extend-select = ["B"]
+extend-ignore = [
+    "B008",  # Depends()/Form() en defaults es el patron idiomatico de FastAPI
+    "DTZ011",  # date.today() es correcto aqui: son fechas de calendario (prestamos/multas), no datetimes con zona
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.0",
+    "ruff>=0.16.7",
+]
